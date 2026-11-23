@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { FiEye, FiEyeOff } from "react-icons/fi"
 
 import FormInput from '~/components/formInput'
 import { parseApiError } from '~/lib/api-error'
@@ -8,6 +9,7 @@ import { useLogin } from '~/features/auth/hook'
 import { loginSchema, type TLoginSchema } from '~/validators/auth'
 
 const LoginPage = () => {
+  const [showPassword, setShowPassword] = useState<boolean>(false)
   const onLogin = useLogin()
 
   const methods = useForm<TLoginSchema>({
@@ -47,9 +49,11 @@ const LoginPage = () => {
 
         <FormInput
           name="password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           label="Password"
           placeholder="Password"
+          iconRight={showPassword ? <FiEye /> : <FiEyeOff />}
+          onClickIconRight={() => setShowPassword(!showPassword)}
           required
         />
 
