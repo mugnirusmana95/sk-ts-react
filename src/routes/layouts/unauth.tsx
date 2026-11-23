@@ -1,10 +1,19 @@
-import { Navigate, Outlet } from 'react-router'
+import { useEffect } from 'react'
+import { Navigate, Outlet, useLocation } from 'react-router'
+import { useIsAuthed } from '~/stores/auth-store'
 
 const UnauthLayout = () => {
-  const isAuth = true
+  const isAuth = useIsAuthed()
+  const { pathname, search, hash } = useLocation()
+
+  useEffect(() => {
+    if (isAuth && pathname) sessionStorage.setItem('NEXT_UNAUTH', pathname + search + hash)
+    else sessionStorage.removeItem('NEXT_UNAUTH')
+  }, [isAuth, pathname, search, hash])
 
   if (isAuth) {
-    return <Navigate to="/dashboard" replace />
+    const goNextAuth = sessionStorage.getItem('NEXT_AUTH')
+    return <Navigate to={goNextAuth ?? '/dashboard'} replace />
   }
 
   return (
