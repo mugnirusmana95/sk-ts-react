@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Navigate, Outlet, useLocation } from 'react-router'
-import { useIsAuthed } from '~/stores/auth-store'
+import { useIsAuthed } from '~/stores/auth'
 
 const AuthLayout = () => {
   const isAuth = useIsAuthed()

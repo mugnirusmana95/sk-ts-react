@@ -2,7 +2,7 @@ import axios from 'axios'
 import { toast } from 'sonner'
 import type { AxiosResponse } from 'axios'
 
-import { useAuthStore } from '~/stores/auth-store'
+import { useAuthStore } from '~/stores/auth'
 import type { ApiResponse } from '~/lib/api-types'
 
 export const http = axios.create({

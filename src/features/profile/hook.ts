@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { profileApi } from '~/features/profile/api'
-import { useAuthStore } from '~/stores/auth-store'
+import { useAuthStore } from '~/stores/auth'
 
 export const useGetProfile = () => {
   const login = useAuthStore((s) => s.login)
