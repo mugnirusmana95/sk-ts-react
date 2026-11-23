@@ -8,13 +8,7 @@ type FormInputProps = Omit<ComponentProps<'textarea'>, 'name'> & {
   error?: string
 }
 
-const BaseInput = ({
-  label,
-  error,
-  className,
-  required,
-  ...props
-}: FormInputProps) => {
+const BaseInput = ({ label, error, className, required, ...props }: FormInputProps) => {
   const id = props.id ?? props.name
 
   return (
@@ -30,7 +24,7 @@ const BaseInput = ({
         <textarea
           id={id}
           aria-invalid={!!error}
-          className={`w-full px-2 outline-none min-h-16 max-h-48 ${className ?? ''}`}
+          className={`max-h-48 min-h-16 w-full px-2 outline-none ${className ?? ''}`}
           {...props}
         ></textarea>
       </div>

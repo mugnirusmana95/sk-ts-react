@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { FiEye, FiEyeOff } from "react-icons/fi"
+import { FiEye, FiEyeOff } from 'react-icons/fi'
 
 import FormInput from '~/components/formInput'
 import { parseApiError } from '~/lib/api-error'
@@ -49,7 +49,7 @@ const LoginPage = () => {
 
         <FormInput
           name="password"
-          type={showPassword ? "text" : "password"}
+          type={showPassword ? 'text' : 'password'}
           label="Password"
           placeholder="Password"
           iconRight={showPassword ? <FiEye /> : <FiEyeOff />}
