@@ -5,7 +5,10 @@ export type ApiResponse<T = null> = {
   data: T
 }
 
-export type ApiFieldError = { field: string; message: string }
+export type ApiFieldError = {
+  field: string
+  message: string
+}
 
 export type ApiErrorResponse = {
   status: number
