@@ -5,10 +5,13 @@ import type { AxiosResponse } from 'axios'
 import { useAuthStore } from '~/stores/auth'
 import type { ApiResponse } from '~/lib/api-types'
 
+const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+
 export const http = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   timeout: 15000,
   withCredentials: true,
+  headers: { 'X-Timezone': timezone },
 })
 
 http.interceptors.response.use(
@@ -18,7 +21,7 @@ http.interceptors.response.use(
 
     toast.error(message)
 
-    if (axios.isAxiosError(error) && error.response?.status === 401) {
+    if (axios.isAxiosError(error) && (error?.response?.data?.status === 401 || error.response?.status === 401)) {
       useAuthStore.getState().logout()
     }
     return Promise.reject(error)

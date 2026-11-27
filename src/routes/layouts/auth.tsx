@@ -1,25 +1,42 @@
-import { useEffect } from 'react'
 import { Navigate, Outlet, useLocation } from 'react-router'
+
 import { useIsAuthed } from '~/stores/auth'
+
+import Sidebar from '~/components/sidebar'
+import Header from '~/components/header'
 
 const AuthLayout = () => {
   const isAuth = useIsAuthed()
-  const { pathname, search, hash } = useLocation()
-
-  useEffect(() => {
-    if (!isAuth && pathname) sessionStorage.setItem('NEXT_AUTH', pathname + search + hash)
-    else sessionStorage.removeItem('NEXT_AUTH')
-  }, [isAuth, pathname, search, hash])
+  const location = useLocation()
 
   if (!isAuth) {
-    const goNextUnauth = sessionStorage.getItem('NEXT_UNAUTH')
-    return <Navigate to={goNextUnauth ?? '/login'} replace />
+    const isLogout = location.state?.reason === 'logout'
+
+    return (
+      <Navigate
+        to="/login"
+        replace
+        state={isLogout ? null : { from: location }}
+      />
+    )
   }
 
   return (
-    <div>
-      Auth <br />
-      <Outlet />
+    <div className="max-w-screen min-h-screen max-h-screen flex flex-row font-inter">
+      <Sidebar />
+
+      <div className="w-full flex flex-col no-scrollbar bg-gray-300 z-10">
+        <Header />
+
+        <div className="w-full h-full p-2 md:p-5 pl-5 md:pl-16">
+          <div
+            key={location.pathname}
+            className="w-full h-full animate-page-in motion-reduce:animate-none"
+          >
+            <Outlet />
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

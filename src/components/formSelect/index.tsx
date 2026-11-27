@@ -139,9 +139,8 @@ const BaseSelect = <T, V = unknown>({
           aria-expanded={open}
           aria-invalid={!!error}
           tabIndex={disabled ? -1 : 0}
-          className={`flex h-9 w-full flex-row items-stretch overflow-hidden rounded border ${
-            error ? 'border-red-500' : 'border-gray-400'
-          } ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
+          className={`flex h-9 w-full flex-row items-stretch overflow-hidden rounded border ${error ? 'border-red-500' : 'border-gray-400'
+            } ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
           onClick={toggle}
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
@@ -194,9 +193,8 @@ const BaseSelect = <T, V = unknown>({
 
             <div
               role="listbox"
-              className={`no-scrollbar flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto ${
-                loading ? 'opacity-60' : ''
-              }`}
+              className={`no-scrollbar flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto ${loading ? 'opacity-60' : ''
+                }`}
             >
               {filtered.length > 0 ? (
                 filtered.map((item, i) => {
@@ -209,11 +207,10 @@ const BaseSelect = <T, V = unknown>({
                       role="option"
                       aria-selected={isSelected}
                       aria-disabled={isDisabled}
-                      className={`rounded border p-2 ${
-                        isDisabled
-                          ? 'bg-gray-200 text-gray-400 select-none'
-                          : 'cursor-pointer hover:bg-gray-100'
-                      } ${isSelected ? 'border-blue-500 bg-blue-50' : 'border-gray-400'}`}
+                      className={`rounded border p-2 duration-300 ${isDisabled
+                        ? 'bg-gray-200 text-gray-400 select-none'
+                        : 'cursor-pointer hover:border-blue-500 hover:bg-gray-200'
+                        } ${isSelected ? 'border-blue-500 bg-blue-50' : 'border-gray-200'}`}
                       onClick={() => {
                         if (!isDisabled) handleSelect(item)
                       }}
